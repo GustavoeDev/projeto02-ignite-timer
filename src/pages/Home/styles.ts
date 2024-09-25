@@ -16,88 +16,13 @@ export const HomeContainer = styled.main`
   }
 `;
 
-export const FormContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  color: ${(props) => props.theme["gray-300"]};
-  font-size: 1.125rem;
-  font-weight: bold;
-  flex-wrap: wrap;
-`;
-
-export const CounterContainer = styled.div`
-  width: 100%;
-
-  font-family: "Roboto Mono", monospace;
-  font-size: 10rem;
-  line-height: 8rem;
-  color: ${(props) => props.theme["gray-100"]};
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-
-  span {
-    background-color: ${(props) => props.theme["gray-700"]};
-    padding: 2rem 1rem;
-  }
-`;
-
-const BaseInput = styled.input`
-  background: transparent;
-  height: 2.5rem;
-  border: 0;
-  border-bottom: 2px solid ${(props) => props.theme["gray-500"]};
-  font-weight: bold;
-  font-size: 1.125rem;
-  padding: 0 0.5rem;
-  color: ${(props) => props.theme["gray-100"]};
-
-  &:focus {
-    box-shadow: none;
-    border-color: ${(props) => props.theme["green-500"]};
-  }
-
-  &::placeholder {
-    text-align: center;
-    color: ${(props) => props.theme["gray-500"]};
-  }
-`;
-
-export const ProjectInput = styled(BaseInput)`
-  flex: 1;
-`;
-
-export const MinutesInput = styled(BaseInput)`
-  width: 4rem;
-  text-align: center;
-`;
-
-export const Separator = styled.div`
-  padding: 2rem;
-  color: ${(props) => props.theme["green-500"]};
-
-  width: 4rem;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-`;
-
-export const ButtonContainer = styled.button`
+const ButtonBase = styled.button`
   width: 100%;
   padding: 1.125rem 0;
 
-  background-color: ${(props) => props.theme["green-500"]};
   border: 0;
   border-radius: 8px;
 
-  color: ${(props) => props.theme["gray-100"]};
   font-weight: bold;
 
   display: flex;
@@ -106,6 +31,20 @@ export const ButtonContainer = styled.button`
   gap: 0.5rem;
 
   cursor: pointer;
+`;
+
+export const StopButtonContainer = styled(ButtonBase)`
+  background-color: ${(props) => props.theme["red-500"]};
+  color: ${(props) => props.theme["white"]};
+
+  &:hover {
+    background-color: ${(props) => props.theme["red-700"]};
+  }
+`;
+
+export const ButtonContainer = styled(ButtonBase)`
+  background-color: ${(props) => props.theme["green-500"]};
+  color: ${(props) => props.theme["gray-100"]};
 
   &:disabled {
     opacity: 0.7;
