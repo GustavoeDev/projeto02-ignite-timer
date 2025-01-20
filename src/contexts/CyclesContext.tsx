@@ -43,14 +43,23 @@ export function CyclesContextProvider({
       cycles: [],
       isCycleActiveId: null,
     },
-    () => {
+    (initialState) => {
       const storedStateAsJSON = localStorage.getItem(
         "@ignite-timer:cycles:state-1.0.0"
       );
 
       if (storedStateAsJSON) {
-        return JSON.parse(storedStateAsJSON);
+        try {
+          const parsedState = JSON.parse(storedStateAsJSON);
+          // Garantir que o estado recuperado seja válido
+          if (parsedState && Array.isArray(parsedState.cycles)) {
+            return parsedState;
+          }
+        } catch (error) {
+          console.error("Erro ao ler o estado do localStorage:", error);
+        }
       }
+      return initialState; // Caso não tenha dados válidos, usa o estado inicial.
     }
   );
 
@@ -62,7 +71,10 @@ export function CyclesContextProvider({
     localStorage.setItem("@ignite-timer:cycles:state-1.0.0", stateJSON);
   }, [cyclesState]);
 
-  const { cycles, isCycleActiveId } = cyclesState;
+  const { cycles, isCycleActiveId } = cyclesState || {
+    cycles: [],
+    isCycleActiveId: null,
+  };
 
   const cycleActive = cycles.find((cycle) => cycle.id === isCycleActiveId);
 
